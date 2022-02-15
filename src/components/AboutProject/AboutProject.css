@@ -1,0 +1,70 @@
+.project{
+  width: 100%;
+  padding: 110px 70px;
+  box-sizing: border-box;
+}
+.project__chart{
+  width: 100%;
+  height: 36px;
+  display: flex;
+}
+.project__info{
+  display: flex;
+  margin: 70px 0 110px;
+}
+.project__title{
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  margin: 0 0 26px;
+  color: #000;
+}
+.project__item{
+  margin-right: 40px;
+}
+.project__text{
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+  color: #000;
+}
+.project__first-item{
+  width: 20%;
+  background-color: #2BE080;
+}
+.project__duration{
+  color: #000;
+  width: 100%;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 36px;
+  margin: 0;
+  text-align: center;
+
+}
+.project__first-item_name{
+  width: 20%;
+}
+.project__second-item_name{
+  width: 80%;
+  
+}
+.project__name{
+  width: 100%;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #A0A0A0;
+  margin: 14px 0 0;
+  text-align: center;
+
+}
+.project__second-item{
+  width: 80%;
+  background-color: #F2F2F2;
+}

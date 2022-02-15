@@ -1,0 +1,11 @@
+.section__title{
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  color: #000;
+  margin: 0 0 23px;
+}
+.section__line{
+  border-top: 1px solid #000;
+}
