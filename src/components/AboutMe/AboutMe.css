@@ -1,0 +1,55 @@
+.about{
+  padding: 110px 70px 125px;
+}
+.about__wrap{
+  display: grid;
+  grid-template-areas: "info info photo";
+  margin: 66px 0 100px;
+}
+.about__photo{
+  width: 270px;
+  height: 327px;
+  object-fit: cover;
+  border-radius: 10px;
+  grid-area: photo;
+}
+.about__info{
+  grid-area: info;
+}
+.about__name{
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  margin: 0 0 18px;
+  color: #000;
+}
+.about__dev{
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0 0 26px;
+  color: #000;
+}
+.about__info-me{
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0 270px 80px 0;
+  color: #000;
+}
+
+.about_link{
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration: none;
+  margin-right: 20px;
+  color: #000;
+}
+.about_link:hover{
+  opacity: .5;
+}

@@ -3,6 +3,7 @@ import React from "react";
 import Header from '../Header/Header';
 import { Routes, Route } from 'react-router-dom';
 import Main from '../Main/Main';
+import Footer from '../Footer/Footer';
 
 
 
@@ -16,6 +17,7 @@ function App() {
           <Route exact path='/' element={<Main />}>
           </Route>
         </Routes>
+        <Footer/>
       </div>
     </CurrentUserContext.Provider>
   );
