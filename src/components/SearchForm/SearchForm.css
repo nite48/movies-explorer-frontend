@@ -1,0 +1,94 @@
+.search {
+  width: 100%;
+  margin: 70px 0;
+  display: flex;
+  align-items: center;
+}
+
+.search__button {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  background-color: #FDFDFD;
+
+}
+
+.search__button:hover {
+  opacity: .8;
+  cursor: pointer;
+}
+
+.search__content {
+  width: calc(100% - 227px);
+  height: 48px;
+  padding-left: 19px;
+  padding-right: 7px;
+  margin: 0;
+  display: flex;
+  border: solid 1px #000000;
+  box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+  border-radius: 50px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search__icon {
+  width: 34px;
+  height: 34px;
+}
+
+.search__input {
+  width: calc(100% - 34px * 2);
+  border: none;
+  padding: 0;
+  background-color: #FDFDFD;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #000;
+}
+
+.search__input:focus {
+  background: linear-gradient(#F9F9F9, #DCDCDC);
+}
+
+.search__input::placeholder {
+  color: #A0A0A0;
+}
+
+.search__input::-webkit-search-cancel-button {
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  background: url('../../images/cross-icon.svg') center no-repeat;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.search__input:focus {
+  outline: none;
+}
+
+.search__line {
+  height: 1px;
+  border: 0;
+  margin: 0;
+  margin-bottom: 10px;
+  background-color: #E8E8E8;
+}
+
+.search__sign {
+  width: 34px;
+  height: 34px;
+}
+
+.search__vertical {
+  width: 40px;
+  height: 1px;
+  background-color: #CBCBCB;
+  border: 0;
+  margin: 0;
+  transform: rotate(90deg);
+}

@@ -2,8 +2,9 @@ import React from "react";
 import { Link, Route } from 'react-router-dom';
 import logoPath from '../../images/logo.svg';
 import './Header.css';
+import Navigation from '../Navigation/Navigation';
 
-function Header(){
+function Header(props){
   return(
     <>
       <Route exact path='/'>
@@ -12,6 +13,15 @@ function Header(){
           <div>
             <Link to='/signup' className="header__link">Регистрация</Link>
             <Link to='/signin' className="header__link"><button className="header__button">Вход</button></Link>
+          </div>
+        </header>
+      </Route>
+      <Route path={['/movies', 'saved-movies', '/profile']}>
+        <header className="header header_theme_light">
+          <Link to='/'><img src={logoPath} alt='Логотип' className="header__logo"/></Link>
+          <Navigation/>
+          <div className="header__block" onClick={props.onClickBlock}>
+            <span className="header__block_sign"></span>
           </div>
         </header>
       </Route>

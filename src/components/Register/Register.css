@@ -79,7 +79,10 @@
   background-color: #3456F3;
   margin: 69px 0 16px;
 }
-
+.register__button-submit:hover{
+  opacity: .8;
+  cursor: pointer;
+}
 
 .register__info{
   width: 100%;

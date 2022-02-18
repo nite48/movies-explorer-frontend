@@ -1,0 +1,71 @@
+.card{
+  width: 100%;
+  background-color: #FDFDFD;
+  /* box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08); */
+  overflow: hidden;
+}
+.card__head{
+  width: 100%;
+  margin-top: 14px;
+  align-items: center;
+  
+}
+.card__title{
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  color: #000;
+  margin: 0;
+}
+.card__duration{
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #A0A0A0;
+  margin: 0;
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+.card__close-button{
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: url('../../images/close-icon.svg') center no-repeat;
+}
+.card__button:hover {
+  cursor: pointer;
+  border: 1px solid #2BE080;
+  border-radius: 50%;
+}
+.card__button{
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: url('../../images/save-icon.svg') center no-repeat;
+}
+.card__button_active{
+  background: url('../../images/save-icon-active.svg') center no-repeat;
+}
+.card__image{
+  width: 100%;
+  display: block;
+}
+.card__line{
+  height: 1px;
+  border: 0;
+  margin: 0;
+  margin-bottom: 6px;
+  background-color: #E8E8E8;
+}
+.card__info{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 29px;
+  align-items: center;
+}
