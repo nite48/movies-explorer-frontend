@@ -107,3 +107,47 @@
   opacity: .7;
   cursor: pointer;
 }
+
+
+@media screen and (max-width: 850px) {
+  .register{
+    padding: 232px 0;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .register {
+    padding: 56px 0 30px;
+  }
+
+  .register__button {
+    margin: 157px 0 14px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .register__content {
+    width: 260px;
+  }
+
+  .register__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .register__logo {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .register__title {
+    width: 100%;
+    text-align: center;
+    margin: 50px 0 80px;
+  }
+
+  .register__info {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

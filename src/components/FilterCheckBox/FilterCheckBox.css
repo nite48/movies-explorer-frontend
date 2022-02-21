@@ -2,7 +2,6 @@
   width: 207px;
   height: 20px;
   display: flex;
-  /* padding: 0 30px 0 9px; */
   box-sizing: border-box;
   justify-content: space-between;
 }
@@ -17,9 +16,6 @@
   color: #000;
 }
 
-/* .filter {
-  ;
-} */
 
 .filter__box {
   opacity: 0;
@@ -67,4 +63,24 @@
 
 .filter__box:checked + .filter__slider:before {
   transform: translateX(16px);
+}
+
+@media screen and (max-width: 770px) {
+  .filter {
+    width: 188px;
+    margin-top: 38px;
+
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .filter__name {
+    font-size: 11px;
+    line-height: 18px;
+    margin-left: 13px;
+  }
+
+  .filter {
+    margin-top: 45px;
+  }
 }

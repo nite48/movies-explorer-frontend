@@ -35,3 +35,31 @@
   margin: 0;
   background-color: #E6E6E6;
 }
+
+@media screen and (max-width: 800px) {
+  .portfolio__name {
+    font-size: 28px;
+  }
+
+  .portfolio__sign {
+    width: 27px;
+    height: 27px;
+  }
+}
+
+@media screen and (max-width: 626px) {
+  .portfolio__name {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+
+  .portfolio__image {
+    width: 18px;
+    height: 18px;
+  }
+}

@@ -33,10 +33,6 @@
   justify-content: space-between;
 }
 
-.search__icon {
-  width: 34px;
-  height: 34px;
-}
 
 .search__input {
   width: calc(100% - 34px * 2);
@@ -58,15 +54,6 @@
   color: #A0A0A0;
 }
 
-.search__input::-webkit-search-cancel-button {
-  appearance: none;
-  width: 30px;
-  height: 30px;
-  background: url('../../images/cross-icon.svg') center no-repeat;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
 .search__input:focus {
   outline: none;
 }
@@ -84,11 +71,23 @@
   height: 34px;
 }
 
-.search__vertical {
-  width: 40px;
-  height: 1px;
-  background-color: #CBCBCB;
-  border: 0;
-  margin: 0;
-  transform: rotate(90deg);
+
+@media screen and (max-width: 770px) {
+  .search {
+    margin: 80px 0 109px;
+    flex-direction: column;
+  }
+  .search__content {
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .search__content {
+    width: 90%;
+  }
+
+  .search__input {
+    font-size: 14px;
+  }
 }

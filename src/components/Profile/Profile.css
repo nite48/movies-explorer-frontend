@@ -80,3 +80,32 @@
   opacity: .5;
   cursor: pointer;
 }
+
+@media screen and (max-width: 850px) {
+  .profile__content {
+    margin: 236px 0 269px;
+  }
+
+  .profile__edit {
+    margin-top: 210px;
+  }
+
+  .profile__greetings {
+    margin: 0 0 96px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .profile__content {
+    width: 260px;
+    margin: 70px 0 40px;
+  }
+
+  .profile__edit {
+    margin-top: 379px;
+  }
+
+  .profile__greetings {
+    margin: 0 0 80px;
+  }
+}

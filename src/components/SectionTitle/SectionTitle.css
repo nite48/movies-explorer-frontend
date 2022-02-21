@@ -9,3 +9,10 @@
 .section__line{
   border-top: 1px solid #000;
 }
+@media screen and (max-width: 450px) {
+  .section-title__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0 0 28px;
+  }
+}
