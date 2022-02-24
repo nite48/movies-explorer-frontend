@@ -2,6 +2,7 @@
   width: 100%;
   padding: 110px 70px;
   box-sizing: border-box;
+  background-color: #202020;
 }
 .project__chart{
   width: 100%;
@@ -18,7 +19,7 @@
   font-size: 20px;
   line-height: 24px;
   margin: 0 0 26px;
-  color: #000;
+  color: #FFFFFF;
 }
 .project__item{
   margin-right: 40px;
@@ -29,7 +30,7 @@
   font-size: 14px;
   line-height: 20px;
   margin: 0;
-  color: #000;
+  color: #FFFFFF;
 }
 .project__first-item{
   width: 20%;
@@ -44,7 +45,9 @@
   line-height: 36px;
   margin: 0;
   text-align: center;
-
+}
+.project__duration:last-child{
+  color: #FFFFFF;
 }
 .project__first-item_name{
   width: 20%;
@@ -66,7 +69,7 @@
 }
 .project__second-item{
   width: 80%;
-  background-color: #F2F2F2;
+  background-color: #303030;
 }
 
 @media screen and (max-width: 770px) {

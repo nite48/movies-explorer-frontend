@@ -42,7 +42,6 @@ function Portfolio() {
             <img src={arrow} className="portfolio__image" alt="Стрелка" />
           </div>
         </Link>
-        <hr className="portfolio__line" />
       </nav>
     </div>
   );

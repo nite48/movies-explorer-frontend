@@ -23,11 +23,10 @@ function Header(props) {
         </header>
       </Route>
       <Route path={["/movies", "/saved-movies", "/profile"]}>
-        <header className="header header_theme_light">
+        <header className="header header_theme_black">
           <Link to="/">
             <img src={logoPath} alt="Логотип" className="header__logo" />
           </Link>
-          <Navigation />
           <div className="header__block" onClick={props.onClickBlock}>
             <span className="header__block_sign"></span>
           </div>

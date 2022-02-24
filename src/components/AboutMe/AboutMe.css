@@ -1,5 +1,6 @@
 .about{
   padding: 110px 70px 125px;
+  background-color: #202020;
 }
 .about__wrap{
   display: grid;
@@ -22,7 +23,7 @@
   font-size: 50px;
   line-height: 58px;
   margin: 0 0 18px;
-  color: #000;
+  color: #FFFFFF;
 }
 .about__dev{
   font-family: 'Inter', 'Arial', sans-serif;
@@ -30,7 +31,7 @@
   font-size: 18px;
   line-height: 20px;
   margin: 0 0 26px;
-  color: #000;
+  color: #FFFFFF;
 }
 .about__info-me{
   font-family: 'Inter', 'Arial', sans-serif;
@@ -38,7 +39,7 @@
   font-size: 14px;
   line-height: 22px;
   margin: 0 270px 80px 0;
-  color: #000;
+  color: #FFFFFF;
 }
 
 .about__link{
@@ -48,7 +49,7 @@
   line-height: 17px;
   text-decoration: none;
   margin-right: 20px;
-  color: #000;
+  color: #FFFFFF;
 }
 .about__link:hover{
   opacity: .5;

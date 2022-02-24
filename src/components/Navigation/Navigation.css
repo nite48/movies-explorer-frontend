@@ -1,6 +1,8 @@
 .navigation{
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 .navigation_closed{
   display: none;
@@ -17,13 +19,15 @@
   text-decoration: none;
   margin-left: 20px;
   padding: 0;
-  color: #000;
+  color: #FFFFFF;
 }
+
 .navigation__link:hover{
   opacity: .8;
 }
 .navigation__link:first-of-type {
   visibility: hidden;
+  margin-left: 0
 }
 .navigation__link_active{
  font-weight: 500;
@@ -36,7 +40,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  color: #000;
+  color: #FFFFFF;
   text-decoration: none;
 }
 .navigation__profile-link:hover{
@@ -57,7 +61,7 @@
   height: 30px;
   border: none;
   border-radius: 6px;
-  background-color: #F9F9F9;
+  background-color: #313131;
 }
 
 

@@ -6,7 +6,7 @@
   font-size: 140px;
   line-height: 169px;
   text-align: center;
-  color: #000;
+  color: #FFFFFF;
 }
 .page-not-found__info {
   width: 100%;
@@ -15,7 +15,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-  color: #000;
+  color: #FFFFFF;
   text-align: center;
 }
 .page-not-found__wrap {
@@ -28,7 +28,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  color: #3456f3;
+  color: #4285F4;
   text-decoration: none;
 }
 

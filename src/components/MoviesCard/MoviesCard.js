@@ -23,7 +23,6 @@ function MoviesCard(props) {
             ></button>
           )}
         </div>
-        <hr className="card__line" />
         <p className="card__duration">1ч 42м</p>
       </div>
     </div>

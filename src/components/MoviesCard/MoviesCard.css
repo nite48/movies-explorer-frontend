@@ -1,6 +1,6 @@
 .card{
   width: 100%;
-  background-color: #FDFDFD;
+  background-color: #222222;
   overflow: hidden;
 }
 .card__head{
@@ -14,7 +14,7 @@
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;
-  color: #000;
+  color: #FFFFFF;
   margin: 0;
 }
 .card__duration{
@@ -22,7 +22,7 @@
   font-weight: 400;
   font-size: 11px;
   line-height: 13px;
-  color: #A0A0A0;
+  color: #8B8B8B;
   margin: 0;
   margin-top: 6px;
   margin-bottom: 10px;
@@ -37,7 +37,7 @@
 }
 .card__button:hover {
   cursor: pointer;
-  border: 1px solid #2BE080;
+  border: 1px solid #EE3465;
   border-radius: 50%;
 }
 .card__button{
@@ -47,6 +47,7 @@
   padding: 0;
   border: none;
   background: url('../../images/save-icon.svg') center no-repeat;
+  background-color: #222222;
 }
 .card__button_active{
   background: url('../../images/save-icon-active.svg') center no-repeat;

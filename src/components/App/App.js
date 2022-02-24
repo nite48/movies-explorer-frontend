@@ -10,6 +10,7 @@ import PopupNavigation from "../PopupNavigation/PopupNavigation";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import PageNotFound from "../PageNotFound/PageNotFound";
+import './App.css';
 
 function App() {
   const [isPopupNavigation, setIsPopupNavigation] = React.useState(false);

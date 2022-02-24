@@ -23,7 +23,7 @@ function Profile() {
             <input
               type="text"
               className="profile__input"
-              defaultValue="example@yandex.ru"
+              defaultValue=""
               placeholder="Email"
             />
           </div>
