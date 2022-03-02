@@ -30,7 +30,7 @@ function AboutProject() {
           <p className="project__duration">1 неделя</p>
         </div>
         <div className="project__second-item">
-          <p className="project__duration">4 недели</p>
+          <p className="project__duration project__duration-white">4 недели</p>
         </div>
       </div>
 

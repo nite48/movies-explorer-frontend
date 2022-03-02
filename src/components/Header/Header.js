@@ -27,6 +27,7 @@ function Header(props) {
           <Link to="/">
             <img src={logoPath} alt="Логотип" className="header__logo" />
           </Link>
+          <Navigation />
           <div className="header__block" onClick={props.onClickBlock}>
             <span className="header__block_sign"></span>
           </div>

@@ -2,6 +2,7 @@
   width: 100%;
   background-color: #222222;
   overflow: hidden;
+  border-radius: 10px;
 }
 .card__head{
   width: 100%;

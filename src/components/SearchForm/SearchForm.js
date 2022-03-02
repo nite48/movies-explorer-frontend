@@ -14,6 +14,7 @@ function SearchForm() {
             type="search"
             className="search__input"
             placeholder="Фильм"
+            required
           ></input>
           <button type="submit" className="search__button">
             <img src={findPath} className="search__sign" alt="Поиск" />
