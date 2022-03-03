@@ -1,0 +1,128 @@
+.about{
+  padding: 110px 70px 125px;
+  background-color: #202020;
+}
+.about__wrap{
+  display: grid;
+  grid-template-areas: "info info photo";
+  margin: 66px 0 100px;
+}
+.about__photo{
+  width: 270px;
+  height: 327px;
+  object-fit: cover;
+  border-radius: 10px;
+  grid-area: photo;
+}
+.about__info{
+  grid-area: info;
+}
+.about__name{
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  margin: 0 0 18px;
+  color: #FFFFFF;
+}
+.about__dev{
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0 0 26px;
+  color: #FFFFFF;
+}
+.about__info-me{
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0 270px 80px 0;
+  color: #FFFFFF;
+}
+
+.about__link{
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration: none;
+  margin-right: 20px;
+  color: #FFFFFF;
+}
+.about__link:hover{
+  opacity: .5;
+}
+@media screen and (max-width:1050px) {
+  .about__info-me{
+    margin-right: 100px;
+  }
+  
+}
+
+@media screen and (max-width: 800px) {
+  .about {
+    padding: 90px 50px;
+  }
+  .about__info-me {
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 50px;
+    margin-right: 50px;
+  }
+  .about__name {
+    font-size: 40px;
+    line-height: 40px;
+    margin-bottom: 16px;
+  }
+  .about__photo {
+    width: 255px;
+    height: 307px;
+  }
+  .about__dev {
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 20px;
+  }
+  .about__wrap {
+    margin-bottom: 90px;
+    grid-template-areas: 
+    "info photo";
+  }
+}
+
+@media screen and (max-width: 626px) {
+  .about {
+    padding: 70px 14px;
+  }
+  .about__info-me {
+    font-size: 11px;
+    line-height: 16xpx;
+    margin-bottom: 40px;
+    margin-right: 0;
+  }
+  .about__link {
+    margin-right: 26px;
+  }
+  .about__name {
+    font-size: 30px;
+    line-height: 36px;
+    margin: 40px 0 20px;
+  }
+  .about__photo {
+    width: 292px;
+    height: 352px;
+    margin: 0 auto;
+  }
+  .about__dev {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .about__wrap {
+    margin: 60px 0 69px;
+    grid-template-areas: 
+    "photo"
+    "info";
+  }
+}
