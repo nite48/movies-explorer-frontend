@@ -4,7 +4,6 @@ import profileIcon from "../../images/profile-icon.svg";
 import "./Navigation.css";
 
 function Navigation(props) {
-  console.log(props.isOpen)
   return (
     <>
       <div className={`navigation ${props.isOpen ? "" : "navigation_closed"}`}>
