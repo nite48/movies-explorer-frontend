@@ -9,7 +9,6 @@ function handleCheckResponse(res) {
 }
 
 export const signUp = (name, email, password) => {
-  console.log(email)
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     credentials: "include",
@@ -27,6 +26,7 @@ export const signIn = (email, password) => {
         method: "POST",
         credentials: "include",
         headers: {
+            'Accept': 'application/json',
             "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
@@ -51,12 +51,14 @@ export const signOut = () => {
     });
 };
 
-export const getUserProfile = () => {
+export const getUserProfile = (token) => {
     return fetch(`${BASE_URL}/users/me`, {
         method: "GET",
         credentials: "include",
         headers: {
-            "Content-Type": "application/json"
+            'Accept': 'application/json',
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
         },
     })
     .then((res) => handleCheckResponse(res));

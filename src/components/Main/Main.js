@@ -4,16 +4,20 @@ import NavTab from "../NavTab/NavTab";
 import AboutProject from "../AboutProject/AboutProject";
 import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe";
+import Header from "../Header/Header";
 
-function Main() {
+function Main({loggedIn}) {
   return (
-    <main>
-      <Promo />
-      <NavTab />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-    </main>
+    <>
+      <Header loggedIn={loggedIn}/>
+      <main>
+        <Promo />
+        <NavTab />
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+      </main>
+    </>
   );
 }
 export default Main;

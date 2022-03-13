@@ -1,9 +1,8 @@
 .navigation{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
+  display: none;
+  
 }
+
 .navigation__menu{
   display: flex;
   padding: 0;
@@ -22,8 +21,7 @@
 .navigation__link:hover{
   opacity: .8;
 }
-.navigation__link:first-of-type {
-  visibility: hidden;
+.navigation__link{
   margin-left: 0
 }
 .navigation__link_active{
@@ -46,7 +44,6 @@
 .navigation__profile{
   width: 100px;
   height: 30px;
-  margin-left: 50px;
 }
 .navigation__profile-wrap{
   display: flex;
@@ -60,15 +57,45 @@
   border-radius: 6px;
   background-color: #313131;
 }
-
-
+.navigation__popup_opened{
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .3);
+}
+.navigation__close{
+  position: fixed;
+  top: 22px;
+  right: 22px;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+}
+.navigation__close-icon{
+  width: 22px;
+  height: 22px;
+}
 
 @media screen and (max-width: 770px) {
   .navigation {
-    margin: 105px 0 93px;
-    height: calc(100vh - 159px - 93px);
-    flex-direction: column;
-    justify-content: space-between;
+    padding-top: 159px;
+  }
+  .navigation_opened{
+    width: 520px;
+    height: 100vh;
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: #202020;
+    ;
+    z-index: 1;
   }
 
   .navigation_closed {
@@ -84,9 +111,6 @@
     margin: 0 0 28px;
   }
 
-  .navigation__link:first-of-type {
-    visibility: visible;
-  }
 
   .navigation__link_active {
     border-bottom: 2px solid #FFFFFF;
@@ -97,13 +121,23 @@
     align-items: center;
   }
 
+  .navigation__profile{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 444px;
+  }
+
   
 }
 
 @media screen and (max-width: 520px) {
   .navigation {
-    margin: 100px 0 48px;
-    height: calc(100vh - 144px - 48px);
+    padding-top: 144px;
+  }
+  .navigation_opened{
+    width: 100%;
+    left: 0;
+    bottom: 0;
   }
 
   .navigation__link {

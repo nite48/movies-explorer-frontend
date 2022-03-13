@@ -28,14 +28,9 @@
   margin-top: 6px;
   margin-bottom: 10px;
 }
-.card__close-button{
-  width: 30px;
-  height: 30px;
-  margin: 0;
-  padding: 0;
-  border: none;
+/* .card__close-button{
   background: url('../../images/close-icon.svg') center no-repeat;
-}
+} */
 .card__button:hover {
   cursor: pointer;
   border: 1px solid #EE3465;
@@ -55,7 +50,9 @@
 }
 .card__image{
   width: 100%;
+  height: 203px;
   display: block;
+  object-fit: cover;
 }
 .card__line{
   height: 1px;
@@ -69,4 +66,16 @@
   justify-content: space-between;
   margin-bottom: 29px;
   align-items: center;
+}
+
+@media screen and (max-width: 770px) {
+  .card__image{
+      height: 190px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .card__image {
+      height: 168px;
+  }
 }

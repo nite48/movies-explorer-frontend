@@ -49,11 +49,12 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 20px;
-  color: #000;
+  color: #FFFFFF;
+  outline: none;
 }
 
 .search__input:focus {
-  background: linear-gradient(#F9F9F9, #DCDCDC);
+  background: linear-gradient(#2F2F2F, #2F2F2F);
 }
 
 .search__input::placeholder {

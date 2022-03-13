@@ -1,4 +1,4 @@
-.card-list {
+.card-list__elements {
   width: 100%;
   box-sizing: border-box;
   padding: 70px 0 30px;
@@ -6,16 +6,21 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 38px 20px;
 }
+.card-list{
+  display: flex;
+  flex-direction: column;
+}
 
-@media screen and (max-width: 850px) {
-  .card-list {
+
+@media screen and (max-width: 770px) {
+  .card-list__elements {
     grid-template-columns: repeat(2, 1fr);
     gap: 36px 30px;
   }
 }
 
-@media screen and (max-width: 500px) {
-  .card-list {
+@media screen and (max-width: 415px) {
+  .card-list__elements {
     padding-top: 40px;
     grid-template-columns: repeat(1, 1fr);
     gap: 16px;

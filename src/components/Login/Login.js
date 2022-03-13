@@ -1,19 +1,17 @@
 import React from "react";
 import logoPath from "../../images/logo.svg";
 import { Link } from "react-router-dom";
-import useInput from "../../hooks/useInput";
+import useFormValidation from "../../hooks/useFormValidation";
 
-function Login({ isSending, handleLoginSubmit, isError }) {
-  const emailInput = useInput('', {isEmpty: true, minLength: 2, isEmail: true});
-  const passwordInput = useInput('', {isEmpty: true, minLength: 2});
-  function handleSubmit(e) {
-    e.preventDefault();
+function Login({ onLogin, apiResponseMessage }) {
+  const { values, errors, isValid, handleChange, resetForm } =
+        useFormValidation({});
 
-    handleLoginSubmit({
-      email: emailInput.value,
-      password: passwordInput.value,
-    });
-  }
+    function handleOnSubmit(evt) {
+        evt.preventDefault();
+        onLogin(values.email, values.password);
+        resetForm();
+    }
   return (
     <section className="register">
       <div className="register__content">
@@ -25,23 +23,22 @@ function Login({ isSending, handleLoginSubmit, isError }) {
           />
         </Link>
         <h2 className="register__title">Рады видеть!</h2>
-        <form className="register__container" onSubmit={handleSubmit} noValidate>
+        <form className="register__container" onSubmit={handleOnSubmit} noValidate>
           <div className="register__input-container">
             <label htmlFor="useremail" className="register__label">
               E-mail
             </label>
             <input
               className="register__input"
-              value={emailInput.value}
-              onChange={emailInput.handleInputChange}
-              onFocus={() => {emailInput.handleOnFocus(true)}}
+              name="email"
+              value={values.email || ""}
+              onChange={handleChange}
               type="email"
               placeholder="Email"
-              readOnly={isSending}
               required
             />
             <span className="form__item-error">
-              {(emailInput.isOnFocus && emailInput.errorText) && emailInput.errorText}
+              {errors.email}
             </span>
           </div>
           <div className="register__input-container">
@@ -50,24 +47,26 @@ function Login({ isSending, handleLoginSubmit, isError }) {
             </label>
             <input
               className="register__input"
-              value={passwordInput.value}
-              onChange={passwordInput.handleInputChange}
-              onFocus={() => {passwordInput.handleOnFocus(true)}}
+              name="password"
+              onChange={handleChange}
+              value={values.password || ""}
               type="password"
               placeholder="Пароль"
-              readOnly={isSending}
               required
             />
             <span className="form__item-error">
-              {(passwordInput.isOnFocus && passwordInput.errorText) && passwordInput.errorText}
+              {errors.password}
             </span>
           </div>
           <span className="register__input-error register__input-error_invisible">
-            {isError ? 'Что-то пошло не так...' : ''}
+            {apiResponseMessage}
           </span>
           <button
             type="submit"
-            className={(emailInput.inputValid && passwordInput.inputValid && !isSending) ? `register__button-submit register__button-submit-in` : `form__button_disabled`}
+            className={`register__button-submit ${
+              !isValid && "register__submit-button_disable"
+            }`}
+            disabled={!isValid}
           >
             Войти
           </button>

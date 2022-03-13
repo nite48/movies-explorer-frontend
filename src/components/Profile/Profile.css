@@ -81,6 +81,9 @@
   opacity: .5;
   cursor: pointer;
 }
+.profile__button_disable{
+  color: #8B8B8B;
+}
 
 @media screen and (max-width: 850px) {
   .profile__content {

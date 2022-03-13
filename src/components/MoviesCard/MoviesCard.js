@@ -1,29 +1,35 @@
 import React from "react";
-import picturePath from "../../images/kommunist.png";
 import "./MoviesCard.css";
 
-function MoviesCard(props) {
-  const [isSaved, setIsSaved] = React.useState(false);
-  const handleSaveClick = () => {
-    setIsSaved(isSaved ? false : true);
+function MoviesCard({ movie, onLikeClick, checkBookmarkStatus}) {
+  const { nameEN, duration, image, trailer } = movie;
+  const isLiked = checkBookmarkStatus(movie);
+  const durationConverter = (duration) => {
+    const hours = Math.floor(duration / 60);
+    const minutes = duration % 60;
+    return `${hours > 0 ? hours + "ч " : ""}${minutes}м`;
   };
+    console.log(isLiked)
+    const cardLikeButtonClassName = `card__button ${
+      isLiked ? "card__button_active" : ""
+  }`;
+  function handleBookmarkClick() {
+    onLikeClick(movie, isLiked);
+}
 
   return (
     <div className="card">
-      <img className="card__image" src={picturePath} alt="Постер фильма" />
+      <a href={trailer} target="_blank" rel="noopener noreferrer"><img className="card__image" src={image} alt="Постер фильма" /></a>
       <div className="card__head">
         <div className="card__info">
-          <h2 className="card__title">Рудбой</h2>
-          {props.isSavedMovie ? (
-            <button className="card__close-button"></button>
-          ) : (
+          <h2 className="card__title">{nameEN}</h2>
             <button
-              className={`card__button ${isSaved ? "card__button_active" : ""}`}
-              onClick={handleSaveClick}
+              className={cardLikeButtonClassName}
+              type="button"
+              onClick={handleBookmarkClick}
             ></button>
-          )}
         </div>
-        <p className="card__duration">1ч 42м</p>
+        <p className="card__duration">{durationConverter(duration)}</p>
       </div>
     </div>
   );

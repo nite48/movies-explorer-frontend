@@ -2,18 +2,20 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import profileIcon from "../../images/profile-icon.svg";
 import "./Navigation.css";
+import closePopupPath from '../../images/close-icon.svg';
 
-function Navigation(props) {
+function Navigation({isOpen, onClose}) {
   return (
     <>
-      <div className={`navigation ${props.isOpen ? "" : "navigation_closed"}`}>
+      <div className={`navigation ${isOpen ? "navigation_opened" : "navigation_closed"}`}>
+      <button className="navigation__close"><img src={closePopupPath} onClick={onClose} className="navigation__close-icon" alt="крестик" /></button>
         <nav className="navigation__menu">
           <NavLink
             exact
             to="/"
             className="navigation__link"
             activeClassName="navigation__link_active"
-            onClick={props.onCLose}
+            onClick={onClose}
           >
             Главная
           </NavLink>
@@ -22,7 +24,6 @@ function Navigation(props) {
             to="/movies"
             className="navigation__link"
             activeClassName="navigation__link_active"
-            onClick={props.onCLose}
           >
             Фильмы
           </NavLink>
@@ -31,7 +32,6 @@ function Navigation(props) {
             to="/saved-movies"
             className="navigation__link"
             activeClassName="navigation__link_active"
-            onClick={props.onCLose}
           >
             Сохранённые фильмы
           </NavLink>
@@ -42,7 +42,6 @@ function Navigation(props) {
               to="/profile"
               className="navigation__profile-link"
               activeClassName="navigation__profile-link_active"
-              onClick={props.onClose}
             >
               Аккаунт
             </NavLink>

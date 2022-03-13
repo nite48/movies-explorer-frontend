@@ -2,22 +2,17 @@ import React from "react";
 import logoPath from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 import "./Register.css";
-import useInput from "../../hooks/useInput";
+import useFormValidation from "../../hooks/useFormValidation";
 
-function Register({ isSending, handleRegisterSubmit, isError }) {
-  const nameInput = useInput('', {isEmpty: true, minLength: 2, isName: true});
-  const emailInput = useInput('', {isEmpty: true, minLength: 2, isEmail: true});
-  const passwordInput = useInput('', {isEmpty: true, minLength: 2});
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(e)
+function Register({ onRegister, apiResponseMessage }) {
+  const { values, errors, isValid, handleChange, resetForm } =
+        useFormValidation({});
 
-    handleRegisterSubmit({
-      name: nameInput.value,
-      email: emailInput.value,
-      password: passwordInput.value,
-    });
-  }
+    function handleOnSubmit(evt) {
+        evt.preventDefault();
+        onRegister(values);
+        resetForm();
+    }
   return (
     <section className="register">
       <div className="register__content">
@@ -29,23 +24,23 @@ function Register({ isSending, handleRegisterSubmit, isError }) {
           />
         </Link>
         <h2 className="register__title">Добро пожаловать !</h2>
-        <form className="register__container" onSubmit={handleSubmit} noValidate>
+        <form className="register__container" onSubmit={handleOnSubmit}>
           <div className="register__input-container">
             <label htmlFor="username" className="register__label">
               Имя
             </label>
             <input
               className="register__input"
-              value={nameInput.value}
-              onChange={nameInput.handleInputChange}
-              onFocus={() => {nameInput.handleOnFocus(true)}}
+              name="name"
+              value={values.name || ""}
+              onChange={handleChange}
               type="text"
               placeholder="Имя"
-              readOnly={isSending}
+              autoComplete="off"
               required
             />
             <span className="form__item-error">
-              {(nameInput.isOnFocus && nameInput.errorText) && nameInput.errorText}
+              {errors.name}
             </span>
           </div>
           <div className="register__input-container">
@@ -54,16 +49,16 @@ function Register({ isSending, handleRegisterSubmit, isError }) {
             </label>
             <input
               className="register__input"
-              value={emailInput.value}
-              onChange={emailInput.handleInputChange}
-              onFocus={() => {emailInput.handleOnFocus(true)}}
+              name="email"
+              value={values.email || ""}
+              onChange={handleChange}
               type="email"
               placeholder="Email"
-              readOnly={isSending}
+              autoComplete="off"
               required
             />
             <span className="form__item-error">
-              {(emailInput.isOnFocus && emailInput.errorText) && emailInput.errorText}
+              {errors.email}
             </span>
           </div>
           <div className="register__input-container">
@@ -72,22 +67,27 @@ function Register({ isSending, handleRegisterSubmit, isError }) {
             </label>
             <input
               className="register__input"
-              onChange={passwordInput.handleInputChange}
-              value={passwordInput.value}
-              onFocus={() => {passwordInput.handleOnFocus(true)}}
+              name="password"
+              onChange={handleChange}
+              value={values.password || ""}
               type="password"
               placeholder="Пароль"
-              readOnly={isSending}
+              autoComplete="off"
               required
             />
             <span className="form__item-error">
-              {(passwordInput.isOnFocus && passwordInput.errorText) && passwordInput.errorText}
+              {errors.password}
             </span>
           </div>
           <span className="register__input-error register__input-error_invisible">
-          {isError ? 'Произошла ошибка. Попробуйте снова.' : ''}
+            {apiResponseMessage}
           </span>
-          <button type="submit" className={(nameInput.inputValid && emailInput.inputValid && passwordInput.inputValid && !isSending) ? `register__button-submit` : `register__button-submit`}>
+          <button 
+            type="submit"
+            className={`register__button-submit ${
+                !isValid && "register__submit-button_disable"
+            }`}
+            disabled={!isValid}>
             Зарегестрироваться
           </button>
           <p className="register__info">
