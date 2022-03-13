@@ -41,20 +41,6 @@ function MoviesCardList({
     setCurrenCount(count);
   }
 
-  // function handleResize() {
-  //   const windowSize = window.innerWidth;
-  //   const sizePortion = getCount(windowSize);
-  //   setExtraPortion(sizePortion.extra);
-  // }
-  
-  // React.useEffect(() => {
-  //   window.addEventListener("resize", handleResize);
-
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, []);
-
   React.useEffect(() => {
     const windowSize = window.innerWidth;
     const sizePortion = getCount(windowSize);
@@ -67,7 +53,6 @@ function MoviesCardList({
   function handleMoreCards() {
     renderExtraPortion();
   }
-  console.log(movies)
   return (
     <section className="card-list">
       <div className="card-list__elements">

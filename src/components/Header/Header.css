@@ -12,6 +12,10 @@
   align-items: center;
   justify-content: space-between;
 }
+.header__logout_container{
+
+}
+
 .header__link_signin{
   font-family: 'Inter', 'Arial', sans-serif;
   font-weight: 500;
@@ -20,6 +24,9 @@
   color: #fff;
   font-style: normal;
   text-decoration: none;
+}
+.header__signin_block {
+  display: block !important;
 }
 .header__link{
   font-family: 'Inter', 'Arial', sans-serif;
@@ -122,6 +129,7 @@
     padding-right:30px;
     padding-top: 18px;
     justify-content: space-between;
+    align-items: center;
   }
   /* .header__movies{
     display: flex;

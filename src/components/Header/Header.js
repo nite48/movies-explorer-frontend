@@ -17,9 +17,10 @@ function Header({ loggedIn }) {
   function closeNavPopup() {
       setIsNavPopupOpen(false);
   }
-  
+  const mobileClass = `${isMobile ? "header__signin_block": ""}`
+  console.log(isMobile)
   return (
-      <header className={`header ${location.pathname === '/' ? "header_theme_dark" : ""}`}>
+      <header className={`header ${location.pathname === '/' ? `header_theme_dark ${mobileClass}` : ""}`}>
         {loggedIn ? (
           <>
             {!isMobile &&(
@@ -100,7 +101,7 @@ function Header({ loggedIn }) {
                 <button className="header__button">Вход</button>
               </Link>
             </div>
-        </div>
+          </div>
         
         )}
     </header>      
