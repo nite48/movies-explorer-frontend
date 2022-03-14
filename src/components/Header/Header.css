@@ -12,9 +12,6 @@
   align-items: center;
   justify-content: space-between;
 }
-.header__logout_container{
-
-}
 
 .header__link_signin{
   font-family: 'Inter', 'Arial', sans-serif;
@@ -37,7 +34,12 @@
   text-decoration: none;
   margin-left: 16px;
 }
-
+.header__signin_block-off{
+  display: flex !important;
+}
+.header__signin_block-on{
+  display: block !important;
+}
 .header_theme_dark{
   background-color: #073042;
 }
@@ -131,12 +133,6 @@
     justify-content: space-between;
     align-items: center;
   }
-  /* .header__movies{
-    display: flex;
-    justify-content: space-between;
-    padding-left:30px;
-    padding-right:30px;
-  } */
 
   .header__block {
     display: block;
@@ -192,9 +188,5 @@
     margin-left: 14px;
 
   }
-  /* .header__movies{
-    padding: 0 14px;
-    
-  } */
   
 }

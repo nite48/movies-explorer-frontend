@@ -55,7 +55,7 @@ function SearchForm({ handleSearch, setPreloader, setIsChecked, isLoading }) {
           </button>
         </div>
         <hr className="search__vertical" />
-        <FilterCheckBox onCheckbox={onCheckbox}/>
+        <FilterCheckBox onCheckbox={onCheckbox} />
       </form>
       <hr className="search__line" />
     </>

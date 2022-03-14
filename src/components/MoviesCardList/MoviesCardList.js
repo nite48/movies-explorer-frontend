@@ -76,14 +76,14 @@ function MoviesCardList({
           ))}
       </div>
       {!isSavedPage && currentCount < movies.length && (
-      <button
-        className="movies__more"
-        aria-label="Загрузка фильмов"
-        onClick={handleMoreCards}
-      >
-        Ещё
-      </button>
-    )}
+        <button
+          className="movies__more"
+          aria-label="Загрузка фильмов"
+          onClick={handleMoreCards}
+        >
+          Ещё
+        </button>
+      )}
     </section>
   );
 }

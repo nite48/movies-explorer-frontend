@@ -35,7 +35,6 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { getAllMovies } from "../../utils/MoviesApi";
 
-
 function App() {
   const [currentUser, setCurrentUser] = React.useState({
     name: "",
@@ -118,7 +117,7 @@ function App() {
   }
 
   function handleUpdateUser(userData) {
-    console.log(userData)
+    console.log(userData);
     updateUserProfile(userData.name, userData.email)
       .then((res) => {
         if (res) {
@@ -159,7 +158,6 @@ function App() {
     getAllMovies()
       .then((data) => {
         const moviesArray = data.map((item) => {
-          console.log(item)
           const imageURL = item.image
             ? `https://api.nomoreparties.co${item.image.url}`
             : IMAGE_NOT_FOUND;
@@ -278,17 +276,17 @@ function App() {
     if (!token) {
       return;
     } else {
-        Promise.all([getUserProfile(token), getFavoriteMovies()])
-          .then(([userData, favoriteMovieData]) => {
-            setCurrentUser({
-              ...currentUser,
-              name: userData.name,
-              email: userData.email,
-            });
-          })
-          .catch((err) => {
-            console.log(err);
+      Promise.all([getUserProfile(token), getFavoriteMovies()])
+        .then(([userData, favoriteMovieData]) => {
+          setCurrentUser({
+            ...currentUser,
+            name: userData.name,
+            email: userData.email,
           });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }, [loggedIn]);
 

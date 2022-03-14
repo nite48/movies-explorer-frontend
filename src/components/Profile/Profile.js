@@ -5,16 +5,12 @@ import useFormValidation from "../../hooks/useFormValidation";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Header from "../Header/Header";
 
-function Profile({
-  loggedIn,
-  apiResponseMessage,
-  userData,
-  onEditProfile,
-  onLogOut,
-}) {
+function Profile({ loggedIn, userData, onEditProfile, onLogOut }) {
   const currentUser = React.useContext(CurrentUserContext);
-  const { values, errors, isValid, handleChange, resetForm } =
-    useFormValidation({ email: currentUser.email, name: currentUser.name });
+  const { values, errors, isValid, handleChange } = useFormValidation({
+    email: currentUser.email,
+    name: currentUser.name,
+  });
 
   const [isValuesNotMatched, setisValuesNotMatched] = React.useState(false);
 

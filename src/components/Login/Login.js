@@ -5,13 +5,13 @@ import useFormValidation from "../../hooks/useFormValidation";
 
 function Login({ onLogin, apiResponseMessage }) {
   const { values, errors, isValid, handleChange, resetForm } =
-        useFormValidation({});
+    useFormValidation({});
 
-    function handleOnSubmit(evt) {
-        evt.preventDefault();
-        onLogin(values.email, values.password);
-        resetForm();
-    }
+  function handleOnSubmit(evt) {
+    evt.preventDefault();
+    onLogin(values.email, values.password);
+    resetForm();
+  }
   return (
     <section className="register">
       <div className="register__content">
@@ -23,7 +23,11 @@ function Login({ onLogin, apiResponseMessage }) {
           />
         </Link>
         <h2 className="register__title">Рады видеть!</h2>
-        <form className="register__container" onSubmit={handleOnSubmit} noValidate>
+        <form
+          className="register__container"
+          onSubmit={handleOnSubmit}
+          noValidate
+        >
           <div className="register__input-container">
             <label htmlFor="useremail" className="register__label">
               E-mail
@@ -37,9 +41,7 @@ function Login({ onLogin, apiResponseMessage }) {
               placeholder="Email"
               required
             />
-            <span className="form__item-error">
-              {errors.email}
-            </span>
+            <span className="form__item-error">{errors.email}</span>
           </div>
           <div className="register__input-container">
             <label htmlFor="userpassword" className="register__label">
@@ -54,9 +56,7 @@ function Login({ onLogin, apiResponseMessage }) {
               placeholder="Пароль"
               required
             />
-            <span className="form__item-error">
-              {errors.password}
-            </span>
+            <span className="form__item-error">{errors.password}</span>
           </div>
           <span className="register__input-error register__input-error_invisible">
             {apiResponseMessage}

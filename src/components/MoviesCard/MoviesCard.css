@@ -28,9 +28,6 @@
   margin-top: 6px;
   margin-bottom: 10px;
 }
-/* .card__close-button{
-  background: url('../../images/close-icon.svg') center no-repeat;
-} */
 .card__button:hover {
   cursor: pointer;
   border: 1px solid #EE3465;

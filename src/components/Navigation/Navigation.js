@@ -2,13 +2,24 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import profileIcon from "../../images/profile-icon.svg";
 import "./Navigation.css";
-import closePopupPath from '../../images/close-icon.svg';
+import closePopupPath from "../../images/close-icon.svg";
 
-function Navigation({isOpen, onClose}) {
+function Navigation({ isOpen, onClose }) {
   return (
     <>
-      <div className={`navigation ${isOpen ? "navigation_opened" : "navigation_closed"}`}>
-      <button className="navigation__close"><img src={closePopupPath} onClick={onClose} className="navigation__close-icon" alt="крестик" /></button>
+      <div
+        className={`navigation ${
+          isOpen ? "navigation_opened" : "navigation_closed"
+        }`}
+      >
+        <button className="navigation__close">
+          <img
+            src={closePopupPath}
+            onClick={onClose}
+            className="navigation__close-icon"
+            alt="крестик"
+          />
+        </button>
         <nav className="navigation__menu">
           <NavLink
             exact
