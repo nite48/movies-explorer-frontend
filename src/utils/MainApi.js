@@ -1,4 +1,3 @@
-// const BASE_URL = "http://localhost:3000";
 const BASE_URL = "https://api.movie.copy.project.nomoredomains.work";
 
 function handleCheckResponse(res) {
@@ -12,6 +11,7 @@ function handleCheckResponse(res) {
 export const signUp = (name, email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       "Content-Type": "application/json",
@@ -24,6 +24,7 @@ export const signUp = (name, email, password) => {
 export const signIn = (email, password) => {
     return fetch(`${BASE_URL}/signin`, {
         method: "POST",
+        credentials: 'include',
         headers: {
             'Accept': 'application/json',
             "Content-Type": "application/json",
@@ -38,6 +39,7 @@ export const signOut = () => {
         method: "POST",
         credentials: "include",
         headers: {
+            'Accept': 'application/json',
             "Content-Type": "application/json",
         },
     })
@@ -68,6 +70,7 @@ export const updateUserProfile = (name, email) => {
         method: "PATCH",
         credentials: "include",
         headers: {
+            'Accept': 'application/json',
             "Content-Type": "application/json"
         },
         body: JSON.stringify({ name, email }),
@@ -80,6 +83,7 @@ export const getSavedMovies = () => {
         method: "GET",
         credentials: "include",
         headers: {
+            'Accept': 'application/json',
             "Content-Type": "application/json"
         },
     })
@@ -91,6 +95,7 @@ export const saveMovie = (movie) => {
         method: "POST",
         credentials: "include",
         headers: {
+            'Accept': 'application/json',
             "Content-Type": "application/json"
         },
         body: JSON.stringify(movie),
@@ -103,6 +108,7 @@ export const deleteMovie = (movieId) => {
         method: "DELETE",
         credentials: "include",
         headers: {
+            'Accept': 'application/json',
             "Content-Type": "application/json"
         },
     })
