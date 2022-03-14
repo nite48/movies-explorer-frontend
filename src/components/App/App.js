@@ -5,7 +5,6 @@ import Footer from "../Footer/Footer";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
-// import PopupNavigation from "../PopupNavigation/PopupNavigation";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import PageNotFound from "../PageNotFound/PageNotFound";
@@ -117,7 +116,6 @@ function App() {
   }
 
   function handleUpdateUser(userData) {
-    console.log(userData);
     updateUserProfile(userData.name, userData.email)
       .then((res) => {
         if (res) {
