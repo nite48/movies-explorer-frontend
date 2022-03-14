@@ -11,6 +11,7 @@ function handleCheckResponse(res) {
 export const signUp = (name, email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       "Content-Type": "application/json",
@@ -23,6 +24,7 @@ export const signUp = (name, email, password) => {
 export const signIn = (email, password) => {
     return fetch(`${BASE_URL}/signin`, {
         method: "POST",
+        credentials: 'include',
         headers: {
             'Accept': 'application/json',
             "Content-Type": "application/json",
