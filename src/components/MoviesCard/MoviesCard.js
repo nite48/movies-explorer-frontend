@@ -1,4 +1,5 @@
 import React from "react";
+import { Route } from "react-router-dom";
 import "./MoviesCard.css";
 
 function MoviesCard({ movie, onLikeClick, checkBookmarkStatus }) {
@@ -12,27 +13,52 @@ function MoviesCard({ movie, onLikeClick, checkBookmarkStatus }) {
   const cardLikeButtonClassName = `card__button ${
     isLiked ? "card__button_active" : ""
   }`;
+  const cardDeleteButtonClassName = `card__button ${
+    isLiked ? "card__button_active-delete" : ""
+  }`;
   function handleBookmarkClick() {
     onLikeClick(movie, isLiked);
   }
 
   return (
-    <div className="card">
-      <a href={trailer} target="_blank" rel="noopener noreferrer">
-        <img className="card__image" src={image} alt="Постер фильма" />
-      </a>
-      <div className="card__head">
-        <div className="card__info">
-          <h2 className="card__title">{nameEN}</h2>
-          <button
-            className={cardLikeButtonClassName}
-            type="button"
-            onClick={handleBookmarkClick}
-          ></button>
+    <>
+      <Route exact path='/movies'>
+        <div className="card">
+          <a href={trailer} target="_blank" rel="noopener noreferrer">
+            <img className="card__image" src={image} alt="Постер фильма" />
+          </a>
+          <div className="card__head">
+            <div className="card__info">
+              <h2 className="card__title">{nameEN}</h2>
+              <button
+                className={cardLikeButtonClassName}
+                type="button"
+                onClick={handleBookmarkClick}
+              ></button>
+            </div>
+            <p className="card__duration">{durationConverter(duration)}</p>
+          </div>
         </div>
-        <p className="card__duration">{durationConverter(duration)}</p>
-      </div>
-    </div>
+      </Route>
+      <Route exact path='/saved-movies'>
+        <div className="card">
+          <a href={trailer} target="_blank" rel="noopener noreferrer">
+            <img className="card__image" src={image} alt="Постер фильма" />
+          </a>
+          <div className="card__head">
+            <div className="card__info">
+              <h2 className="card__title">{nameEN}</h2>
+              <button
+                className={cardDeleteButtonClassName}
+                type="button"
+                onClick={handleBookmarkClick}
+              ></button>
+            </div>
+            <p className="card__duration">{durationConverter(duration)}</p>
+          </div>
+        </div>
+      </Route>
+    </>
   );
 }
 

@@ -1,5 +1,4 @@
 const BASE_URL = "https://api.movie.copy.project.nomoredomains.work";
-
 function handleCheckResponse(res) {
     if (res.ok) {
         return res.json();
@@ -9,7 +8,6 @@ function handleCheckResponse(res) {
 }
 
 export const signUp = (name, email, password) => {
-    console.log(email)
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     credentials: 'include',
@@ -72,7 +70,7 @@ export const updateUserProfile = (name, email) => {
         credentials: "include",
         headers: {
             'Accept': 'application/json',
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         },
         body: JSON.stringify({ name, email }),
     })
@@ -111,6 +109,17 @@ export const deleteMovie = (movieId) => {
         headers: {
             'Accept': 'application/json',
             "Content-Type": "application/json"
+        },
+    })
+    .then((res) => handleCheckResponse(res));
+};
+export const getlogout = () => {
+    return fetch(`${BASE_URL}/signout`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json",
         },
     })
     .then((res) => handleCheckResponse(res));

@@ -53,6 +53,7 @@ function Register({ onRegister, apiResponseMessage }) {
               value={values.email || ""}
               onChange={handleChange}
               type="email"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
               placeholder="Email"
               autoComplete="off"
               required
@@ -71,6 +72,7 @@ function Register({ onRegister, apiResponseMessage }) {
               onChange={handleChange}
               value={values.password || ""}
               type="password"
+              minLength="8"
               placeholder="Пароль"
               autoComplete="off"
               required

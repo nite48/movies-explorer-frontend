@@ -53,6 +53,7 @@ function Movies({
             movies={isChecked ? shortMovies : movies}
             toggleMovieLike={toggleMovieLike}
             checkBookmarkStatus={checkBookmarkStatus}
+            isSavedPage={false}
           />
         )}
       </section>

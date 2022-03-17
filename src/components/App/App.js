@@ -18,6 +18,7 @@ import {
   updateUserProfile,
   deleteMovie,
   saveMovie,
+  getlogout
 } from "../../utils/MainApi";
 import {
   CONFLICT_EMAIL_MESSAGE,
@@ -33,6 +34,7 @@ import {
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { getAllMovies } from "../../utils/MoviesApi";
+import { Redirect } from "react-router-dom";
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({
@@ -40,6 +42,7 @@ function App() {
     email: "",
   });
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [searchSavedMovie, setSearchSavedMovie] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [apiResponseMessage, setResponseMessage] = React.useState(" ");
   const [allMovies, setAllmovies] = React.useState([]);
@@ -64,7 +67,7 @@ function App() {
         })
         .catch((err) => {
           console.log(err);
-          localStorage.removeItem("token");
+          localStorage.removeItem("jwt");
           history.push("/");
         });
     }
@@ -121,8 +124,8 @@ function App() {
         if (res) {
           setCurrentUser({
             ...currentUser,
-            name: res.newName,
-            email: res.newEmail,
+            name: res.name,
+            email: res.email,
           });
           showResponseMessageTimer(SUCCSESS_UPDATE_MESSAGE);
         }
@@ -134,9 +137,14 @@ function App() {
   }
 
   function handleLogOut() {
+    getlogout();
     localStorage.removeItem("jwt");
     localStorage.removeItem("movies");
     localStorage.removeItem("searchResult");
+    localStorage.removeItem("lastSearchName");
+    localStorage.removeItem("lastCheckBoxState");
+    localStorage.removeItem("lastSearchNameSaved");
+    localStorage.removeItem("lastCheckBoxStateSaved");
     setCurrentUser({ name: "", email: "" });
     setAllmovies([]);
     setSearchMoviesResult([]);
@@ -192,6 +200,7 @@ function App() {
   function getFavoriteMovies() {
     getSavedMovies()
       .then((favouriteMovies) => {
+        localStorage.setItem("dataSearchSaved", favouriteMovies)
         setSavedMovies(favouriteMovies);
       })
       .catch((error) => {
@@ -214,6 +223,9 @@ function App() {
     if (result.length === 0 && location === "/saved-movies") {
       setSavedMoviesSearchResponse(SAVED_MOVIE_NOT_FOUND_MESSAGE);
     }
+    if (result.length === 0 && location === "/saved-movies" && data.length === 0 ){
+      getFavoriteMovies();
+    }
     return result;
   }
 
@@ -225,7 +237,6 @@ function App() {
   }
 
   function submitSearch(keyword) {
-    getBeatMovies();
     setTimeout(() => setIsLoading(false), 1000);
     setSearchMoviesResult(search(allMovies, keyword));
     localStorage.setItem(
@@ -235,7 +246,7 @@ function App() {
   }
 
   function submitFavoriteSearch(keyword) {
-    setTimeout(() => setIsLoading(false), 2000);
+    setTimeout(() => setIsLoading(false), 1000);
     setSavedMovies(search(savedMovies, keyword));
   }
 
@@ -274,7 +285,7 @@ function App() {
     if (!token) {
       return;
     } else {
-      Promise.all([getUserProfile(token), getFavoriteMovies()])
+      Promise.all([getUserProfile(), getFavoriteMovies()])
         .then(([userData, favoriteMovieData]) => {
           setCurrentUser({
             ...currentUser,
@@ -314,16 +325,18 @@ function App() {
               <Footer />
             </Route>
             <Route path="/signup">
+              {loggedIn ? <Redirect to="/"/>:
               <Register
                 onRegister={handleRegister}
                 apiResponseMessage={apiResponseMessage}
-              />
+              />}
             </Route>
             <Route path="/signin">
+              {loggedIn ? <Redirect to="/"/>:
               <Login
                 onLogin={handleLogin}
                 apiResponseMessage={apiResponseMessage}
-              />
+              />}
             </Route>
             <ProtectedRoute
               path="/profile"

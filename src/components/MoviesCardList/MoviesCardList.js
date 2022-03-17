@@ -46,7 +46,7 @@ function MoviesCardList({
     const sizePortion = getCount(windowSize);
     setExtraPortion(sizePortion.extra);
     const count = Math.min(movies.length, sizePortion.first);
-    setRenderMovies(movies.slice(0, count));
+    setRenderMovies(movies.slice(0, count)); 
     setCurrenCount(count);
   }, [movies]);
 

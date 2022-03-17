@@ -16,8 +16,9 @@ function Profile({ loggedIn, userData, onEditProfile, onLogOut }) {
 
   function checkValues() {
     if (
-      currentUser.email === values.email &&
-      currentUser.name === values.name
+      currentUser.name === values.name &&
+      currentUser.email === values.email 
+      
     ) {
       setisValuesNotMatched(false);
     } else {
@@ -75,7 +76,7 @@ function Profile({ loggedIn, userData, onEditProfile, onLogOut }) {
                   : "profile__edit profile__button_disable"
               }
               onClick={handleOnSubmit}
-              disabled={!isValid && !isValuesNotMatched}
+              disabled={!isValuesNotMatched}
             >
               {isValid && isValuesNotMatched ? "Сохранить" : "Редактировать"}
             </button>

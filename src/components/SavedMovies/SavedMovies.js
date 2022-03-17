@@ -19,13 +19,11 @@ function SavedMovies({
 }) {
   const [shortMovies, setShortMovies] = React.useState([]);
   const [isChecked, setIsChecked] = React.useState(false);
-
   React.useEffect(() => {
     if (isChecked) {
       setShortMovies(sortShortMovies(movies));
     }
   }, [isChecked]);
-
   return (
     <>
       <Header loggedIn={loggedIn} />
