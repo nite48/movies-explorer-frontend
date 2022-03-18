@@ -35,6 +35,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { getAllMovies } from "../../utils/MoviesApi";
 import { Redirect } from "react-router-dom";
+import InfoToolTip from "../InfoToolTip/InfoToolTip";
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({
@@ -42,12 +43,14 @@ function App() {
     email: "",
   });
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [searchSavedMovie, setSearchSavedMovie] = React.useState(false);
+  const [isInfoToolOpen, setIsInfoToolOpen] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isSuccess, setIsSuccess] = React.useState(false);
   const [apiResponseMessage, setResponseMessage] = React.useState(" ");
   const [allMovies, setAllmovies] = React.useState([]);
   const [searchMoviesResult, setSearchMoviesResult] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
+  const [shortMovie , setShortMovie] = React.useState([]);
   const [moviesSearchResponse, setMoviesSearchResponse] = React.useState("");
   const [savedMoviesSearchResponse, setSavedMoviesSearchResponse] =
     React.useState("");
@@ -72,6 +75,9 @@ function App() {
         });
     }
   }
+  function onCloseAllPopup() {
+    setIsInfoToolOpen(false)
+  }
 
   function handleRegister({ name, email, password }) {
     signUp(name, email, password)
@@ -90,6 +96,7 @@ function App() {
         if (err === "Error 500") {
           return showResponseMessageTimer(SERVER_ERROR_MESSAGE);
         }
+        setIsSuccess(false);
         console.log(err);
       });
   }
@@ -99,6 +106,7 @@ function App() {
       .then((res) => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
+          setIsSuccess(true);
           setLoggedIn(true);
           history.push("/movies");
         }
@@ -114,7 +122,11 @@ function App() {
           console.log(SERVER_ERROR_MESSAGE);
           return showResponseMessageTimer(SERVER_ERROR_MESSAGE);
         }
+        setIsSuccess(false);
         console.log(err);
+      })
+      .finally(() =>{
+        setIsInfoToolOpen(true);
       });
   }
 
@@ -127,12 +139,18 @@ function App() {
             name: res.name,
             email: res.email,
           });
+          setIsSuccess(true);
           showResponseMessageTimer(SUCCSESS_UPDATE_MESSAGE);
         }
       })
       .catch((err) => {
+        setIsSuccess(false);
+        setIsInfoToolOpen(false);
         showResponseMessageTimer(SERVER_ERROR_MESSAGE);
         console.log(err);
+      })
+      .finally(() =>{
+        setIsInfoToolOpen(true);
       });
   }
 
@@ -233,10 +251,15 @@ function App() {
     const shortMoviesArray = movies.filter(
       (movie) => movie.duration <= DURATION_FOR_SORTING_SHORT_FILM
     );
+    console.log(shortMoviesArray)
+    setShortMovie(shortMoviesArray)
+    // localStorage.setItem('resultFilter', JSON.stringify(shortMoviesArray));  //Осуществялется поиск по коротко метражкам
+    // console.log(localStorage.getItem('resultFilter'))
     return shortMoviesArray;
   }
 
   function submitSearch(keyword) {
+    console.log(allMovies)
     setTimeout(() => setIsLoading(false), 1000);
     setSearchMoviesResult(search(allMovies, keyword));
     localStorage.setItem(
@@ -301,6 +324,7 @@ function App() {
 
   React.useEffect(() => {
     const movies = JSON.parse(localStorage.getItem("movies"));
+    console.log(movies)
     if (movies) {
       setAllmovies(movies);
       const searchResult = JSON.parse(localStorage.getItem("searchResult"));
@@ -377,8 +401,11 @@ function App() {
               <PageNotFound />
             </Route>
           </Switch>
-          {/* <PopupNavigation
-          /> */}
+          <InfoToolTip
+            isOpen={isInfoToolOpen}
+            onClose={onCloseAllPopup}
+            onState={isSuccess}
+          />
         </div>
       </CurrentUserContext.Provider>
     </>

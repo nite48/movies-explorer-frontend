@@ -14,6 +14,7 @@ function SearchForm({ handleSearch, setPreloader, setIsChecked, isLoading }) {
   const [isShortMovies, setIsShortMovies] = React.useState(false);
 
   function onCheckbox(checked) {
+    console.log(checked)
     setIsShortMovies(checked);
     setIsChecked(!isShortMovies);
   }

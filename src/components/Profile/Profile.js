@@ -61,6 +61,7 @@ function Profile({ loggedIn, userData, onEditProfile, onLogOut }) {
                 className="profile__input"
                 name="email"
                 type="email"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                 placeholder="Email"
                 required
                 value={values.email || ""}

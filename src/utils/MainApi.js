@@ -1,4 +1,5 @@
-const BASE_URL = "https://api.movie.copy.project.nomoredomains.work";
+// const BASE_URL = "https://api.movie.copy.project.nomoredomains.work";
+const BASE_URL = "http://localhost:3000";
 function handleCheckResponse(res) {
     if (res.ok) {
         return res.json();
