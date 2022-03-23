@@ -2,60 +2,42 @@ import React from "react";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 import "./Movies.css";
-import Preloader from "../Preloader/Preloader";
 import Header from "../Header/Header";
+import FilterCheckBox from "../FilterCheckBox/FilterCheckBox";
+import Navigation from "../Navigation/Navigation";
 
 function Movies({
-  loggedIn,
-  isLoading,
-  onSubmitSearch,
-  movies,
-  setPreloader,
-  moviesSearchResponse,
-  toggleMovieLike,
-  checkBookmarkStatus,
-  sortShortMovies,
+  searchedMovies,
+  showShortMovies,
+  savedMovies,
+  onSearchMovie,
+  keyword,
+  onFilter,
+  onSaveMovie,
+  onDeleteMovie,
+  isSavedMoviesPage,
+  onMenuClick,
 }) {
-  const [shortMovies, setShortMovies] = React.useState([]);
-  const [isChecked, setIsChecked] = React.useState(false);
-  React.useEffect(() => {
-    if (isChecked) {
-      setShortMovies(sortShortMovies(movies));
-    }
-  }, [isChecked]);
-
   return (
     <>
-      <Header loggedIn={loggedIn} />
+      <Header>
+        <Navigation onMenuClick={onMenuClick}/>
+      </Header>
       <section className="movies">
         <SearchForm
-          handleSearch={onSubmitSearch}
-          setPreloader={setPreloader}
-          setIsChecked={setIsChecked}
-          isLoading={isLoading}
+          onSearchMovie={onSearchMovie}
+          isSavedMoviesPage={isSavedMoviesPage}
+          keyword={keyword}
+          onFilter={onFilter}
+          isChecked={showShortMovies}
         />
-        {isLoading && <Preloader />}
-
-        {moviesSearchResponse
-          ? movies.length === 0 && (
-              <p className="movies__response">{moviesSearchResponse}</p>
-            )
-          : movies.length === 0 && (
-              <p className="movies__response">Нужно ввести ключевое слово</p>
-            )}
-
-        {isChecked && movies.length !== 0 && shortMovies.length === 0 && (
-          <p className="movies__response">Среди фильмов нет короткометражек</p>
-        )}
-
-        {movies.length !== 0 && (
-          <MoviesCardList
-            movies={isChecked ? shortMovies : movies}
-            toggleMovieLike={toggleMovieLike}
-            checkBookmarkStatus={checkBookmarkStatus}
-            isSavedPage={false}
-          />
-        )}
+        <MoviesCardList
+          movies={searchedMovies}
+          savedMovies={savedMovies}
+          onSaveMovie={onSaveMovie}
+          onDeleteMovie={onDeleteMovie}
+          isSavedMoviesPage={isSavedMoviesPage}
+        />
       </section>
     </>
   );

@@ -1,32 +1,7 @@
 import React from "react";
 import "./FilterCheckBox.css";
-// import { Route } from "react-router-dom";
 
-function FilterCheckBox({ onCheckbox }) {
-  const [isChecked, setChecked] = React.useState(false);
-  // const [isCheckedSaved, setCheckedSaved] = React.useState(false);
-  function onChange(event) {
-    onCheckbox(!isChecked);
-    setChecked(event.target.checked);
-    localStorage.setItem('lastCheckBoxState', JSON.stringify(!isChecked));
-  }
-  // function onChangeSaved(event) {
-  //   onCheckbox(!isCheckedSaved);
-  //   setCheckedSaved(event.target.checked);
-  //   localStorage.setItem('lastCheckBoxStateSaved', JSON.stringify(!isCheckedSaved));
-  // }
-  React.useEffect(() => {
-    const lastCheckBoxState = JSON.parse(localStorage.getItem('lastCheckBoxState'));
-    if (lastCheckBoxState) {
-      setChecked(lastCheckBoxState);
-    }
-  }, []);
-  // React.useEffect(() => {
-  //   const lastCheckBoxState = JSON.parse(localStorage.getItem('lastCheckBoxStateSaved'));
-  //   if (lastCheckBoxState) {
-  //     setCheckedSaved(lastCheckBoxState);
-  //   }
-  // }, []);
+function FilterCheckBox(props) {
   return (
     <>
       <div className="filter">
@@ -36,8 +11,8 @@ function FilterCheckBox({ onCheckbox }) {
             className="filter__box"
             name="switch"
             id="switch"
-            checked={isChecked}
-            onChange={(e) => onChange(e)}
+            checked={props.isChecked}
+            onChange={props.onFilter}
           />
           <span className="filter__slider"></span>
         </label>

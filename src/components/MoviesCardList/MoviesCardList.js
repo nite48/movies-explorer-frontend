@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
 import {
@@ -10,79 +10,64 @@ import {
   ADD_MAX_NUMBER_MOVIES,
   ADD_MIN_NUMBER_MOVIES,
 } from "../../utils/constants";
+import Preloader from "../Preloader/Preloader";
 
-function MoviesCardList({
-  movies,
-  toggleMovieLike,
-  checkBookmarkStatus,
-  isSavedPage,
-}) {
-  const [extraPortion, setExtraPortion] = React.useState(3);
-  const [currentCount, setCurrenCount] = React.useState(0);
-  const [renderMovies, setRenderMovies] = React.useState([]);
+function MoviesCardList(props) {
 
-  function getCount(windowSize) {
-    if (windowSize > LARGE_SCREEN_RESOLUTION) {
-      return { first: MAX_NUMBER_MOVIES, extra: ADD_MAX_NUMBER_MOVIES };
-    } else if (
-      windowSize > MEDIUM_SCREEN_RESOLUTION &&
-      windowSize <= LARGE_SCREEN_RESOLUTION
-    ) {
-      return { first: MID_NUMBER_MOVIES, extra: ADD_MIN_NUMBER_MOVIES };
+  function calculateShowMore() {
+    return window.innerWidth > LARGE_SCREEN_RESOLUTION ? ADD_MAX_NUMBER_MOVIES : ADD_MIN_NUMBER_MOVIES;
+  }
+
+  //number of movies to render
+  const [totalNumberToRender, setTotalNumberToRender] = React.useState(() => {
+    if (window.innerWidth > LARGE_SCREEN_RESOLUTION) {
+      return MAX_NUMBER_MOVIES;
+    } else if (window.innerWidth > MEDIUM_SCREEN_RESOLUTION) {
+      return MID_NUMBER_MOVIES;
+    } else return MIN_NUMBER_MOVIES;
+  });
+
+  function handleMoreClick() {
+    const moviesNumber = totalNumberToRender + calculateShowMore();
+
+    if (moviesNumber < props.movies.length) {
+      setTotalNumberToRender(moviesNumber);
     } else {
-      return { first: MIN_NUMBER_MOVIES, extra: ADD_MIN_NUMBER_MOVIES };
+      setTotalNumberToRender(props.movies.length);
     }
-  }
-
-  function renderExtraPortion() {
-    const count = Math.min(movies.length, currentCount + extraPortion);
-    const extraMovies = movies.slice(currentCount, count);
-    setRenderMovies([...renderMovies, ...extraMovies]);
-    setCurrenCount(count);
-  }
-
-  React.useEffect(() => {
-    const windowSize = window.innerWidth;
-    const sizePortion = getCount(windowSize);
-    setExtraPortion(sizePortion.extra);
-    const count = Math.min(movies.length, sizePortion.first);
-    setRenderMovies(movies.slice(0, count)); 
-    setCurrenCount(count);
-  }, [movies]);
-
-  function handleMoreCards() {
-    renderExtraPortion();
   }
   return (
     <section className="card-list">
-      <div className="card-list__elements">
-        {isSavedPage &&
-          movies.map((movie) => (
-            <MoviesCard
-              key={movie._id}
-              movie={movie}
-              onLikeClick={toggleMovieLike}
-              checkBookmarkStatus={checkBookmarkStatus}
-            />
+      <Suspense fallback={<Preloader />}>
+        <div className="card-list__elements">
+          {props.movies
+            .slice(
+              0,
+              props.isSavedMoviesPage
+                ? props.movies.length
+                : totalNumberToRender
+            )
+            .map((movie) => (
+              <MoviesCard
+                movie={movie}
+                savedMovies={props.savedMovies}
+                key={movie.id || movie.movieId}
+                onSaveMovie={props.onSaveMovie}
+                onDeleteMovie={props.onDeleteMovie}
+                isSavedMoviesPage={props.isSavedMoviesPage}
+              />
           ))}
-        {!isSavedPage &&
-          renderMovies.map((movie) => (
-            <MoviesCard
-              key={movie.movieId}
-              movie={movie}
-              onLikeClick={toggleMovieLike}
-              checkBookmarkStatus={checkBookmarkStatus}
-            />
-          ))}
-      </div>
-      {!isSavedPage && currentCount < movies.length && (
-        <button
-          className="movies__more"
-          aria-label="Загрузка фильмов"
-          onClick={handleMoreCards}
-        >
-          Ещё
-        </button>
+        </div>
+      </Suspense>
+      {props.movies.length > 0 &&
+        !props.isSavedMoviesPage && totalNumberToRender < props.movies.length && (
+          <button
+            className="movies__more"
+            aria-label="Загрузка фильмов"
+            onClick={handleMoreClick}
+          >
+            Ещё
+          </button>
       )}
     </section>
   );

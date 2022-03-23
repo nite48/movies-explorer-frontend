@@ -1,5 +1,5 @@
-// const BASE_URL = "https://api.movie.copy.project.nomoredomains.work";
-const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "https://api.movie.copy.project.nomoredomains.work";
+// export const BASE_URL = "http://localhost:3000";
 function handleCheckResponse(res) {
     if (res.ok) {
         return res.json();
@@ -51,6 +51,17 @@ export const signOut = () => {
         }
     });
 };
+
+export const checkUserToken = () => {
+    return fetch(`${BASE_URL}/users/me`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        'Accept': 'application/json',
+        "Content-Type": "application/json",
+    },
+    }).then((res) => handleCheckResponse(res));
+  };
 
 export const getUserProfile = (token) => {
     return fetch(`${BASE_URL}/users/me`, {

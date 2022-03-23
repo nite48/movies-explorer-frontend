@@ -1,107 +1,134 @@
-import React from "react";
-import logoPath from "../../images/logo.svg";
+import React, { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
+import validator from "validator";
 import "./Register.css";
-import useFormValidation from "../../hooks/useFormValidation";
+import Form from "../Form/Form";
+import { nameRegex } from "../../utils/constants";
 
-function Register({ onRegister, apiResponseMessage }) {
-  const { values, errors, isValid, handleChange, resetForm } =
-        useFormValidation({});
+function Register({ onRegister }) {
+  const [userRegistration, setUserRegistration] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-    function handleOnSubmit(evt) {
-        evt.preventDefault();
-        onRegister(values);
-        resetForm();
-    }
+  const [isFormValid, setIsFormValid] = useState({
+    isNameValid: false,
+    isEmailValid: false,
+    isPasswordValid: false,
+  });
+
+  const handleChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setUserRegistration((prevState) => ({ ...prevState, [name]: value }));
+    },
+    [setUserRegistration]
+  );
+
+  //validate inputs
+  useEffect(() => {
+    const { name, email, password } = userRegistration;
+
+    const isNameValid = nameRegex.test(name) && name.length > 1;
+    const isEmailValid = validator.isEmail(email);
+    const isPasswordValid = password.length > 7;
+
+    setIsFormValid({ isNameValid, isEmailValid, isPasswordValid });
+  }, [userRegistration]);
+
+  const { isNameValid, isEmailValid, isPasswordValid } = isFormValid;
+
+  const isButtonDisabled = !isNameValid || !isEmailValid || !isPasswordValid;
+
+  const submitButtonClassName = isButtonDisabled
+    ? "form__button form__button_disabled"
+    : "form__button form__button_active";
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const { name, email, password } = userRegistration;
+    onRegister(name, email, password);
+  }
+
   return (
     <section className="register">
-      <div className="register__content">
-        <Link to="/">
-          <img
-            src={logoPath}
-            alt="Логотип BeaFilm"
-            className="register__logo"
-          />
-        </Link>
-        <h2 className="register__title">Добро пожаловать !</h2>
-        <form className="register__container" onSubmit={handleOnSubmit}>
-          <div className="register__input-container">
-            <label htmlFor="username" className="register__label">
-              Имя
-            </label>
-            <input
-              className="register__input"
-              name="name"
-              value={values.name || ""}
-              onChange={handleChange}
-              type="text"
-              placeholder="Имя"
-              autoComplete="off"
-              required
-            />
-            <span className="form__item-error">
-              {errors.name}
-            </span>
+      <Form
+        title="Добро пожаловать!"
+        onSubmit={handleSubmit}
+        link={
+          <div className="form__text-container">
+            <p className="form__text">
+              Уже зарегистрированы?
+              <span>
+                <Link to="/signin" className="form__link">
+                  Войти
+                </Link>
+              </span>
+            </p>
           </div>
-          <div className="register__input-container">
-            <label htmlFor="useremail" className="register__label">
-              E-mail
-            </label>
-            <input
-              className="register__input"
-              name="email"
-              value={values.email || ""}
-              onChange={handleChange}
-              type="email"
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-              placeholder="Email"
-              autoComplete="off"
-              required
-            />
-            <span className="form__item-error">
-              {errors.email}
+        }
+      >
+        <label className="form__input-label">
+          Имя
+          <input
+            className="form__input"
+            type="text"
+            value={userRegistration.name}
+            name="name"
+            onChange={handleChange}
+            required
+          ></input>
+          {!isNameValid && (
+            <span className="form__input-error">
+              Введите имя длиннее 2 символов: пожалуйста, используйте кириллицу
+              или латиницу.
             </span>
-          </div>
-          <div className="register__input-container">
-            <label htmlFor="useremail" className="register__label">
-              Пароль
-            </label>
-            <input
-              className="register__input"
-              name="password"
-              onChange={handleChange}
-              value={values.password || ""}
-              type="password"
-              minLength="8"
-              placeholder="Пароль"
-              autoComplete="off"
-              required
-            />
-            <span className="form__item-error">
-              {errors.password}
+          )}
+        </label>
+
+        <label className="form__input-label">
+          E-mail
+          <input
+            className="form__input"
+            type="email"
+            value={userRegistration.email}
+            name="email"
+            onChange={handleChange}
+            required
+          ></input>
+          {!isEmailValid && (
+            <span className="form__input-error">
+               Введите email в корректном формате example@localhost.com
             </span>
-          </div>
-          <span className="register__input-error register__input-error_invisible">
-            {apiResponseMessage}
-          </span>
-          <button 
-            type="submit"
-            className={`register__button-submit ${
-                !isValid && "register__submit-button_disable"
-            }`}
-            disabled={!isValid}>
-            Зарегестрироваться
-          </button>
-          <p className="register__info">
-            Уже зарегестрированы?{" "}
-            <Link to="/signin" className="register__redirect">
-              Войти
-            </Link>
-          </p>
-        </form>
-      </div>
+          )}
+        </label>
+
+        <label className="form__input-label">
+          Пароль
+          <input
+            className="form__input"
+            type="password"
+            value={userRegistration.password}
+            name="password"
+            onChange={handleChange}
+            required
+          ></input>
+          {!isPasswordValid && (
+            <span className="form__input-error">
+              Минимальная длинна пароля 8 символов
+            </span>
+          )}
+        </label>
+        <button
+          className={submitButtonClassName}
+          type="submit"
+          disabled={isButtonDisabled}
+        >
+          Зарегистироваться
+        </button>
+      </Form>
     </section>
   );
 }
-
 export default Register;

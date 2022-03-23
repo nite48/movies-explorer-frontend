@@ -4,12 +4,14 @@ import "./Profile.css";
 import useFormValidation from "../../hooks/useFormValidation";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Header from "../Header/Header";
+import Navigation from "../Navigation/Navigation";
 
-function Profile({ loggedIn, userData, onEditProfile, onLogOut }) {
+function Profile({ onEditProfile, onMenuClick, onLogOut }) {
   const currentUser = React.useContext(CurrentUserContext);
   const { values, errors, isValid, handleChange } = useFormValidation({
-    email: currentUser.email,
     name: currentUser.name,
+    email: currentUser.email,
+    
   });
 
   const [isValuesNotMatched, setisValuesNotMatched] = React.useState(false);
@@ -36,10 +38,12 @@ function Profile({ loggedIn, userData, onEditProfile, onLogOut }) {
   }
   return (
     <>
-      <Header loggedIn={loggedIn} />
+      <Header>
+        <Navigation onMenuClick={onMenuClick} />
+      </Header>
       <section className="profile">
         <div className="profile__content">
-          <h2 className="profile__greetings">Привет, {userData.name}!</h2>
+          <h2 className="profile__greetings">Привет, {currentUser.name}!</h2>
           <form onSubmit={handleOnSubmit} noValidate>
             <div className="profile__info">
               <label className="profile__label">Имя</label>

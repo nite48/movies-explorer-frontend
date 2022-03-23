@@ -1,63 +1,77 @@
 import React from "react";
-import { Route } from "react-router-dom";
 import "./MoviesCard.css";
+import { BASE_URL } from "../../utils/constants";
 
-function MoviesCard({ movie, onLikeClick, checkBookmarkStatus }) {
-  const { nameEN, duration, image, trailer } = movie;
-  const isLiked = checkBookmarkStatus(movie);
-  const durationConverter = (duration) => {
-    const hours = Math.floor(duration / 60);
-    const minutes = duration % 60;
-    return `${hours > 0 ? hours + "ч " : ""}${minutes}м`;
-  };
-  const cardLikeButtonClassName = `card__button ${
-    isLiked ? "card__button_active" : ""
+function MoviesCard({
+  movie,
+  savedMovies,
+  isSavedMoviesPage,
+  onSaveMovie,
+  onDeleteMovie,
+}) {
+  const isSaved = isSavedMoviesPage ? true : savedMovies.some((m) => m.movieId === movie.id);
+
+  const saveButtonClassName = `${
+    isSavedMoviesPage
+      ? "card__button_active-delete"
+      : isSaved
+      ? "card__button_active"
+      : "card__button"
   }`;
-  const cardDeleteButtonClassName = `card__button ${
-    isLiked ? "card__button_active-delete" : ""
-  }`;
-  function handleBookmarkClick() {
-    onLikeClick(movie, isLiked);
+
+  function handleSaveClick() {
+    if (!isSaved) {
+      onSaveMovie({
+        country: movie.country ? movie.country : "",
+        director: movie.director ? movie.director : "",
+        duration: movie.duration ? movie.duration : 0,
+        year: movie.year ? movie.year : "",
+        description: movie.description
+          ? movie.description
+          : movie.nameRU || movie.nameEN,
+        image: `${BASE_URL}${movie.image ? movie.image.url : ""}`,
+        trailer: movie.trailerLink,
+        thumbnail: `${BASE_URL}${
+          movie.image.formats.thumbnail ? movie.image.formats.thumbnail.url : ""
+        }`,
+        movieId: movie.id,
+        nameRU: movie.nameRU ? movie.nameRU : movie.nameEN,
+        nameEN: movie.nameEN ? movie.nameEN : movie.nameRU,
+        isSaved: movie.isSaved,
+      });
+      // setIsSavedLike(true)
+    } else {
+      // setIsSavedLike(false)
+      onDeleteMovie(movie);
+    }
   }
+
+  function calculateDuration(min) {
+    return `${Math.floor(min / 60)}ч ${min % 60}м`;
+  }
+
+  const movieName = movie.nameRU;
+  const movieImgURL = BASE_URL.concat("/", movie.image.url);
+  const movieDuration = calculateDuration(movie.duration);
 
   return (
     <>
-      <Route exact path='/movies'>
-        <div className="card">
-          <a href={trailer} target="_blank" rel="noopener noreferrer">
-            <img className="card__image" src={image} alt="Постер фильма" />
-          </a>
-          <div className="card__head">
-            <div className="card__info">
-              <h2 className="card__title">{nameEN}</h2>
-              <button
-                className={cardLikeButtonClassName}
-                type="button"
-                onClick={handleBookmarkClick}
-              ></button>
-            </div>
-            <p className="card__duration">{durationConverter(duration)}</p>
+      <div className="card">
+        <a href={isSavedMoviesPage ? movie.trailer : movie.trailerLink} target="_blank" rel="noreferrer">
+          <img className="card__image" src={isSavedMoviesPage ? movie.image : movieImgURL} alt={movieName} />
+        </a>
+        <div className="card__head">
+          <div className="card__info">
+            <h2 className="card__title">{movieName}</h2>
+            <button
+              className={saveButtonClassName}
+              type="button"
+              onClick={handleSaveClick}
+            ></button>
           </div>
+          <p className="card__duration">{movieDuration}</p>
         </div>
-      </Route>
-      <Route exact path='/saved-movies'>
-        <div className="card">
-          <a href={trailer} target="_blank" rel="noopener noreferrer">
-            <img className="card__image" src={image} alt="Постер фильма" />
-          </a>
-          <div className="card__head">
-            <div className="card__info">
-              <h2 className="card__title">{nameEN}</h2>
-              <button
-                className={cardDeleteButtonClassName}
-                type="button"
-                onClick={handleBookmarkClick}
-              ></button>
-            </div>
-            <p className="card__duration">{durationConverter(duration)}</p>
-          </div>
-        </div>
-      </Route>
+      </div>
     </>
   );
 }
