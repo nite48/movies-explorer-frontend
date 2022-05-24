@@ -9,6 +9,7 @@ function handleCheckResponse(res) {
 }
 
 export const signUp = (name, email, password) => {
+    // console.log(name.name, email.email, password.password)
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     credentials: 'include',

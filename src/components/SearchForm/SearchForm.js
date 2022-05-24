@@ -49,7 +49,7 @@ function SearchForm(props) {
         <hr className="search__vertical" />
         <FilterCheckBox
           onFilter={props.onFilter}
-          isShortMovie={props.isShortMovie}
+          isChecked={props.isChecked}
         />
       </form>
       <hr className="search__line" />

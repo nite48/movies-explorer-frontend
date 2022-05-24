@@ -55,9 +55,10 @@ function App() {
   const [isActivePreloader, setIsActivePreloader] = React.useState(false);
   const [savedMoviesKeyword, setSavedMoviesKeyword] = React.useState("");
   const [showShortMovies, setShowShortMovies] = React.useState(() => {
-    const shortStatus = localStorage.getItem("shortStatus");
-    return shortStatus == null ? false :JSON.parse(shortStatus);
+    const showShortMoviesStatus = localStorage.getItem("showShortMovies");
+    return showShortMoviesStatus == null ? false :JSON.parse(showShortMoviesStatus);
   });
+  
   const [keyword, setKeyword] = React.useState(() => {
     const keyword = localStorage.getItem("keyword");
     return keyword == null ? "" : keyword;
@@ -100,7 +101,7 @@ function App() {
   }
   React.useEffect(() => tokenCheck(location), []); //+
 
-  function handleRegister({ name, email, password }) {
+  function handleRegister(name, email, password) {
     signUp(name, email, password)
       .then((res) => {
         if (res) {

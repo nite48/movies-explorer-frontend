@@ -36,9 +36,16 @@ function MoviesCardList(props) {
       setTotalNumberToRender(props.movies.length);
     }
   }
+  const message =
+    props.movies.length <= 0
+      ? props.isSavedMoviesPage
+        ? "Пока нет сохраненных фильмов"
+        : "Фильмов не найдено"
+      : null;
   return (
     <section className="card-list">
       <Suspense fallback={<Preloader />}>
+        <p className="card-list__message">{message}</p>
         <div className="card-list__elements">
           {props.movies
             .slice(
