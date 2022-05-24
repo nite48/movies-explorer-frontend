@@ -383,6 +383,7 @@ function App() {
               isLoggedIn={loggedIn}
               onSearchMovie={handleSavedMovieSearch}
               keyword={savedMoviesKeyword}
+              showShortMovies={showShortMovies}
               onFilter={toggleCheck}
               savedMovies={filterShortMovies(savedMovies)}
               onDeleteMovie={handleDeleteMovie}

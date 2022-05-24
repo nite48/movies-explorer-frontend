@@ -18,7 +18,7 @@ function SavedMovies(props) {
           isSavedMoviesPage={props.isSavedMoviesPage}
           keyword={props.keyword}
           onFilter={props.onFilter}
-          isShortMovie={props.isShortMovie}>
+          isChecked={props.showShortMovies}>
         </SearchForm>
         <MoviesCardList
           movies={props.savedMovies}
