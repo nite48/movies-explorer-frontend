@@ -56,7 +56,17 @@ function App() {
   const [savedMoviesKeyword, setSavedMoviesKeyword] = React.useState("");
   const [showShortMovies, setShowShortMovies] = React.useState(() => {
     const showShortMoviesStatus = localStorage.getItem("showShortMovies");
-    return showShortMoviesStatus == null ? false :JSON.parse(showShortMoviesStatus);
+    console.log(showShortMoviesStatus)
+    return showShortMoviesStatus == null 
+      ? false
+      : JSON.parse(showShortMoviesStatus);
+  });
+  const [showShortSavedMovies, setShowShortSavedMovies] = React.useState(() => {
+    const showShortMoviesStatus = localStorage.getItem("showShortSavedMovies");
+    console.log(showShortMoviesStatus)
+    return showShortMoviesStatus == null 
+      ? false
+      : JSON.parse(showShortMoviesStatus);
   });
   
   const [keyword, setKeyword] = React.useState(() => {
@@ -66,9 +76,9 @@ function App() {
   const [isOpenWindow, setIsOpenWindow] = React.useState(false);
   const [updateProfileMessage, setUpdateProfileMessage] = React.useState("");
   const history = useHistory();
-  let location = useLocation().pathname;
+  const location = useLocation();
   const [searchedMovies, setSearchedMovies] = React.useState(() => {
-    const movies = localStorage.getItem("searchResult");
+    const movies = localStorage.getItem("searchedMovies");
     return movies == null ? [] : JSON.parse(movies);
   });
 
@@ -99,7 +109,7 @@ function App() {
         })
         .finally(() => setIsActivePreloader(false));
   }
-  React.useEffect(() => tokenCheck(location), []); //+
+  React.useEffect(() => tokenCheck(location.pathname), []); //+
 
   function handleRegister(name, email, password) {
     signUp(name, email, password)
@@ -192,13 +202,21 @@ function App() {
     localStorage.removeItem("searchedMovies");
     localStorage.removeItem("keyword");
     localStorage.removeItem("showShortMovies");
+    localStorage.removeItem("showShortSavedMovies");
     localStorage.removeItem("savedMovies");
     setCurrentUser({ name: "", email: "" });
     setAllMovies([]);
     setSavedMovies([]);
     setLoggedIn(false);
+    setKeyword("");
+    setSearchedMovies([]);
+    setShowShortMovies(false);
+    setShowShortSavedMovies(false);
     history.push("/");
   }
+
+
+
 
   function showResponseMessageTimer(error) {
     setResponseMessage(error);
@@ -220,6 +238,7 @@ function App() {
       .catch((error) => {
         setSearchResultMessage(MOVIES_SERVER_ERROR_MESSAGE);
         console.log(error);
+        setIsSuccess(false);
       });
   }
   
@@ -245,26 +264,47 @@ function App() {
   }
 
   function filterShortMovies(movies) {
-    if (movies.length > 0){
-      return movies.filter((movie) => 
-        showShortMovies ? movie.duration <= DURATION_FOR_SORTING_SHORT_FILM : true
-      );
-    }else{
-      return movies;
+    if (location.pathname === '/movies'){
+      if (movies.length > 0){
+        return movies.filter((movie) => 
+          showShortMovies ? movie.duration <= DURATION_FOR_SORTING_SHORT_FILM : true
+        );
+      }else{
+        return movies;
+      }
+    } else if (location.pathname === '/saved-movies') {
+      if (movies.length > 0){
+        return movies.filter((movie) => 
+          showShortSavedMovies ? movie.duration <= DURATION_FOR_SORTING_SHORT_FILM : true
+        );
+      }else{
+        return movies;
+      }
     }
+    
   }
 
   function handleMovieSearch(name) {
-    setTimeout(() => setIsLoading(false), 1000);
+    // setTimeout(() => setIsLoading(false), 1000);
     const foundMoviesList = findMovie(allMovies, name);
     setSearchedMovies(foundMoviesList)
     localStorage.setItem("searchedMovies", JSON.stringify(foundMoviesList));
     localStorage.setItem("keyword", name);
     localStorage.setItem("showShortMovies", JSON.stringify(showShortMovies));
+    localStorage.setItem("showShortSavedMovies", JSON.stringify(showShortSavedMovies));
     setKeyword(name);
   }
   function toggleCheck(event){
-    setShowShortMovies(event.target.checked);
+    
+    if (location.pathname === '/movies'){
+      console.log(location.pathname)
+      localStorage.setItem("showShortMovies", event.target.checked);
+      setShowShortMovies(event.target.checked);
+    } else {
+      localStorage.setItem("showShortSavedMovies", event.target.checked);
+      setShowShortSavedMovies(event.target.checked);
+    }
+    
   }
 
   // Saved movies search
@@ -280,7 +320,10 @@ function App() {
       .then((newSavedMovie) => {
         setSavedMovies([newSavedMovie, ...savedMovies]);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsSuccess(false);
+        console.log(err)
+      });
   }
 
   function handleDeleteMovie(movie) {
@@ -290,8 +333,15 @@ function App() {
       .then((res) => {
         getFavoriteMovies();
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>{
+        console.log(err)
+        setIsSuccess(false);
+      });
   }
+
+  
+
+  
 
   React.useEffect(() => { //+
     if (updateProfileMessage) {
@@ -311,6 +361,7 @@ function App() {
       .catch((err) => {
         console.log(err);
         setSearchResultMessage(MOVIES_SERVER_ERROR_MESSAGE);
+        setIsSuccess(false);
       });
   }, [currentUser]);
 
@@ -383,7 +434,7 @@ function App() {
               isLoggedIn={loggedIn}
               onSearchMovie={handleSavedMovieSearch}
               keyword={savedMoviesKeyword}
-              showShortMovies={showShortMovies}
+              showShortMovies={showShortSavedMovies}
               onFilter={toggleCheck}
               savedMovies={filterShortMovies(savedMovies)}
               onDeleteMovie={handleDeleteMovie}

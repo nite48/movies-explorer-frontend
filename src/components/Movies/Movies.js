@@ -18,6 +18,7 @@ function Movies({
   isSavedMoviesPage,
   onMenuClick,
 }) {
+  console.log(isSavedMoviesPage)
   return (
     <>
       <Header>

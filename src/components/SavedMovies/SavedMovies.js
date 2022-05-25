@@ -7,6 +7,7 @@ import Navigation from "../Navigation/Navigation";
 import "./SavedMovies.css";
 
 function SavedMovies(props) {
+  console.log(props.savedMovies)
   return (
     <>
       <Header>
