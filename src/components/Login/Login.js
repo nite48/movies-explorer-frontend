@@ -1,59 +1,114 @@
-import React from "react";
-import logoPath from "../../images/logo.svg";
+import React, { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
+import "./Login.css";
+import Form from "../Form/Form";
+import validator from "validator";
 
-function Login() {
+function Login({ onLogin }) {
+  const [userLoginDetails, setUserLoginDetails] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [isFormValid, setIsFormValid] = useState({
+    emailValid: false,
+    passwordValid: false,
+  });
+
+  const handleInputChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setUserLoginDetails((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    },
+    [setUserLoginDetails]
+  );
+
+  useEffect(() => {
+    const emailValid = validator.isEmail(userLoginDetails.email);
+    const passwordValid = userLoginDetails.password.length > 7;
+
+    setIsFormValid({
+      emailValid,
+      passwordValid,
+    });
+  }, [userLoginDetails]);
+
+  const { emailValid, passwordValid } = isFormValid;
+
+  const isButtonDisabled = !emailValid || !passwordValid;
+
+  const submitButtonClassName = isButtonDisabled
+    ? "form__button form__button_disabled"
+    : "form__button form__button_active";
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const { email, password } = userLoginDetails;
+    onLogin(email, password);
+  }
+
   return (
-    <section className="register">
-      <div className="register__content">
-        <Link to="/">
-          <img
-            src={logoPath}
-            alt="Логотип BeaFilm"
-            className="register__logo"
-          />
-        </Link>
-        <h2 className="register__title">Рады видеть!</h2>
-        <form className="register__container">
-          <div className="register__input-container">
-            <label htmlFor="useremail" className="register__label">
-              E-mail
-            </label>
-            <input
-              className="register__input"
-              type="email"
-              placeholder="Email"
-              required
-            ></input>
+    <section className="login">
+      <Form
+        title="Рады видеть !"
+        onSubmit={handleSubmit}
+        link={
+          <div className="form__text-container">
+            <p className="form__text">
+              Еще не зарегистрированы?
+              <span>
+                <Link to="/signup" className="form__link">
+                  Регистрация
+                </Link>
+              </span>
+            </p>
           </div>
-          <div className="register__input-container">
-            <label htmlFor="userpassword" className="register__label">
-              Пароль
-            </label>
-            <input
-              className="register__input"
-              type="password"
-              placeholder="Пароль"
-              required
-            ></input>
-          </div>
-          <span className="register__input-error register__input-error_invisible">
-            Что-то пошло не так...
-          </span>
-        </form>
+        }
+      >
+        <label className="form__input-label">
+          E-mail
+          <input
+            className="form__input"
+            type="email"
+            name="email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            value={userLoginDetails.email}
+            onChange={handleInputChange}
+            required
+          ></input>
+          {!emailValid && (
+            <span className="form__input-error">
+              Введите email в корректном формате example@localhost.com
+            </span>
+          )}
+        </label>
+        <label className="form__input-label">
+          Пароль
+          <input
+            className="form__input"
+            type="password"
+            name="password"
+            value={userLoginDetails.name}
+            onChange={handleInputChange}
+            required
+          ></input>
+          {!passwordValid && (
+            <span className="form__input-error">
+              Минимальная длинна пароля 8 символов
+            </span>
+          )}
+        </label>
         <button
+          className={submitButtonClassName}
           type="submit"
-          className="register__button-submit register__button-submit-in"
+          disabled={isButtonDisabled}
         >
           Войти
         </button>
-        <p className="register__info">
-          Ещё не зарегистрированы?{" "}
-          <Link to="/signup" className="register__redirect">
-            Регистрация
-          </Link>
-        </p>
-      </div>
+      </Form>
     </section>
   );
 }

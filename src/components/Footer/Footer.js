@@ -6,7 +6,7 @@ import "./Footer.css";
 
 function Footer() {
   return (
-    <Route exact path={["/", "/movies", "/saved-movies",]}>
+    <Route exact path={["/", "/movies", "/saved-movies"]}>
       <footer className="footer">
         <h2 className="footer__title">
           Учебный проект Яндекс.Практикум х BeatFilm.

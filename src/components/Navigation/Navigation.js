@@ -1,58 +1,30 @@
+import "./Navigation.css";
+import Logo from "../Logo/Logo";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import profileIcon from "../../images/profile-icon.svg";
-import "./Navigation.css";
 
-function Navigation(props) {
-  console.log(props.isOpen)
+function Navigation({ onMenuClick }) {
   return (
     <>
-      <div className={`navigation ${props.isOpen ? "" : "navigation_closed"}`}>
-        <nav className="navigation__menu">
-          <NavLink
-            exact
-            to="/"
-            className="navigation__link"
-            activeClassName="navigation__link_active"
-            onClick={props.onCLose}
-          >
-            Главная
-          </NavLink>
-          <NavLink
-            exact
-            to="/movies"
-            className="navigation__link"
-            activeClassName="navigation__link_active"
-            onClick={props.onCLose}
-          >
+      <nav className="header__navigation">
+        <div className="header__navigation-menu">
+          <Logo />
+          <NavLink to="/movies" className="header__navigation-link">
             Фильмы
           </NavLink>
-          <NavLink
-            exact
-            to="/saved-movies"
-            className="navigation__link"
-            activeClassName="navigation__link_active"
-            onClick={props.onCLose}
-          >
-            Сохранённые фильмы
+          <NavLink to="/saved-movies" className="header__navigation-link">
+            Сохраненные фильмы
           </NavLink>
-        </nav>
-        <div className="navigation__profile">
-          <div className="navigation__profile-wrap">
-            <NavLink
-              to="/profile"
-              className="navigation__profile-link"
-              activeClassName="navigation__profile-link_active"
-              onClick={props.onClose}
-            >
-              Аккаунт
-            </NavLink>
-            <button className="navigator__icon">
-              <img src={profileIcon} alt="Иконка профиля" />
-            </button>
-          </div>
         </div>
-      </div>
+        <NavLink to="/profile" className="header__profile">
+          Аккаунт <div className="header__profile-icon"></div>
+        </NavLink>
+        <div className="header__menu" onClick={onMenuClick}>
+          <div className="header__menu-line"></div>
+          <div className="header__menu-line"></div>
+          <div className="header__menu-line"></div>
+        </div>
+      </nav>
     </>
   );
 }

@@ -24,15 +24,18 @@
   cursor: pointer;
   border: 1px solid #2BE080;
 }
+.movies__response {
+  text-align: center;
+  color: #FFFFFF;
+}
 
-
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 770px) {
   .movies {
     padding: 0 30px;
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 415px) {
   .movies {
     padding: 0 10px;
   }

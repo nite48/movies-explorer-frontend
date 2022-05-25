@@ -23,13 +23,16 @@
   margin: 0 0 60px;
   justify-content: center;
 }
-.page-not-found__link {
+.not-found__go-back-button  {
   font-family: "Inter", "Arial", sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   color: #4285F4;
   text-decoration: none;
+  background-color: transparent;
+  cursor: pointer;
+  border: 0;
 }
 
 @media screen and (max-width: 850px) {
